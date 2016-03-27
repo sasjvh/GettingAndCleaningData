@@ -4,7 +4,7 @@ The downloaded dataset contains several files describing the data:
 * UCI HAR Dataset/features_info.txt - description of the measurement variables
 
 ## Data Dictionary for summarydata.txt
-All of the average variables in the dataset are calculated per activityname per subjectid for the listed raw variable
+All of the average variables in the dataset are calculated per activityname per subjectid for the listed raw variable. The units match those of the variable that is being averaged (refer to raw data information files above for details).
 
 1. subjectid - integer identifying the subject
 2. activityname - name of the activity for which the measurements were taken
