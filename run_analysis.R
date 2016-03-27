@@ -61,5 +61,22 @@ full_data <- rbind(test_data, train_data)
 ## Assumption that dplyr package is installed - here we place it in the environment with a library statement
 library(dplyr)
 
-## Join in Activity Names
-full_data <- inner_join(full_data, activity_labels, by = "activityid")
+## Join in Activity Names, drop activityid
+full_data <- select(inner_join(full_data, activity_labels, by = "activityid"), -activityid)
+
+## Re-order variables
+full_data <- select(full_data, subjectid, activityname, everything())
+
+## Group the data by subject and activity
+full_data <- group_by(full_data, subjectid, activityname)
+
+## Summarize by taking the average for all non grouped variables
+sum_data <- summarize_each(full_data, funs(mean))
+
+## Alter the names on the summary table to show that they are the Average
+for (i in 3:length(names(sum_data))) {
+  names(sum_data)[i] <- paste("average", names(sum_data)[i], sep = "")
+}
+
+## Write the summary table to the working directory
+write.table(sum_data, file = "summarydata.txt", row.names = FALSE)
